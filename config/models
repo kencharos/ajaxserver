@@ -20,7 +20,6 @@ Product json
     price Int
 
 Order json
-    orderNo Int
     productNo Text
     net Int
 

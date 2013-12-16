@@ -1,0 +1,8 @@
+<h1> Order
+$if null orders
+    <p> There are no orders
+$else
+    <ul>
+        $forall Entity orderId ord <- orders
+            <li>
+              #{orderProductNo ord} | #{orderNet ord}
