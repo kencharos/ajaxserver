@@ -20,6 +20,13 @@ library
                      Settings.StaticFiles
                      Settings.Development
                      Handler.Home
+                     Handler.Echo
+                     Handler.Mirror
+                     Handler.Blog
+                     Handler.Article
+                     Handler.Product
+                     Handler.Order
+                     Handler.ProductJson
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

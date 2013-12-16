@@ -1,5 +1,18 @@
 <h1>_{MsgHello}
 
+<a href=@{EchoR "write_message"}>
+  echo
+<a href=@{MirrorR}>
+  mirror
+<a href=@{BlogR}>
+  blog
+<a href=@{ProductR}>
+  製品登録
+<a href=@{ProductJsonR}>
+  製品登録(JSON)
+<a href=@{OrderR}>
+  注文照会
+
 <ol>
   <li>Now that you have a working project you should use the #
     \<a href="http://www.yesodweb.com/book/">Yesod book</a> to learn more. #

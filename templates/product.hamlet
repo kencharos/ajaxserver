@@ -1,0 +1,13 @@
+<h1> Product
+$if null products
+    <p> There are no products
+$else
+    <ul>
+        $forall Entity poductId prod <- products
+            <li>
+                #{productProductNo prod} | #{productName prod} | #{productPrice prod}
+<hr>
+  <form method=post enctype=#{enctype}>
+    ^{productWidget}
+    <div>
+        <input type=submit value="Post New Product">
