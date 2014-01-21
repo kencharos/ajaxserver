@@ -9,6 +9,7 @@ import Prelude
 import Text.Shakespeare.Text (st)
 import Language.Haskell.TH.Syntax
 import Database.Persist.Sqlite (SqliteConf)
+import Database.Persist.TH
 import Yesod.Default.Config
 import Yesod.Default.Util
 import Data.Text (Text)

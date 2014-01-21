@@ -7,7 +7,7 @@ import Import
 -- Its arguments being: areq type label default_value.
 entryForm :: Form Product
 entryForm = renderDivs $ Product
-    <$> areq   textField "ProductNo" Nothing
+    <$> areq   textField "num" Nothing
     <*> areq   textField "Name" Nothing
     <*> areq   intField "Price" Nothing
 

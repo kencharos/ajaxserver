@@ -5,7 +5,7 @@ $else
     <ul>
         $forall Entity poductId prod <- products
             <li>
-                #{productProductNo prod} | #{productName prod} | #{productPrice prod}
+                #{productNum prod} | #{productName prod} | #{productPrice prod}
 <hr>
   <form method=post enctype=#{enctype}>
     ^{productWidget}

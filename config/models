@@ -15,12 +15,29 @@ Article
     deriving
 
 Product json
-    productNo Text
+    num Text
     name Text
     price Int
 
 Order json
-    productNo Text
+    name Text
+    address Text
+    tel Text
+
+Detail json
+	product ProductId
+	order OrderId
     net Int
+
+
+Person
+    name String
+    age Int Maybe
+    deriving Show
+
+BlogPost
+    title String
+    authorId PersonId
+    deriving Show
 
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)
