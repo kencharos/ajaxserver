@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    $.ajax({
+      type :"GET",
+      url: "/product_json",
+      data: {},
+      success: function( data ) {
+        $("#products").text(JSON.stringify(data));
+      }
+    });
+    $("#button").click(function(){
+      console.log("post start" + $("#order").val())
+      $.ajax({
+      type :"POST",
+      url: "/order",
+      data: $("#order").val(),
+      dataType :"json",
+      success: function( data ) {
+        alert(JSON.stringify(data))
+      }})
+    })
+  })
+  </script>
+  <title>JSONテスト</title>
+</head>
+<body>
+<p>
+  <div>JSONデータ取得</div>
+  <div id="products"></div>
+</p>
+<p>
+  <div><input id="button" type="button" value="JSONデータ送信"/></div>
+  <textarea cols="50" rows="10" id="order">
+{"order":{"num":10, "name":"テスト", "address":"住所", "tel":"03"}, 
+   "details":[{"num":"1","net":1},
+              {"num":"2","net":112}]
+  } 
+  </textarea>
+</p>
+</body>
+</html>

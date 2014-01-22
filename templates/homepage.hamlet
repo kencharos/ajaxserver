@@ -8,8 +8,9 @@
   blog
 <a href=@{ProductR}>
   製品登録
-<a href=@{ProductJsonR}>
-  製品登録(JSON)
 <a href=@{OrderR}>
   注文照会
+<a href="static/jsonTest.html">
+  JSON テスト
+
 

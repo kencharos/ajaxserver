@@ -3,6 +3,6 @@ $if null orders
     <p> There are no orders
 $else
     <ul>
-        <li> 注文者名前 | 製品番号 | 製品名 | 値段 | 注文数量
+        <li> 注文ID : 注文者名前 | 製品番号 | 製品名 | 値段 | 注文数量
         $forall (Entity _ d, Entity _ p, Entity okey@(Key oid) o)<- orders
-            <li> #{orderName o} | #{productNum p} | #{productName p}  | #{productPrice p} | #{detailNet d}
+            <li> #{orderNum o} |#{orderName o} | #{productNum p} | #{productName p}  | #{productPrice p} | #{detailNet d}

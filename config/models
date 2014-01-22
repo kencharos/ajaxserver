@@ -21,6 +21,7 @@ Product json
     UniqueNum num
 
 Order json
+    num Int
     name Text
     address Text
     tel Text
