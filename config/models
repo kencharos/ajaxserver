@@ -18,16 +18,19 @@ Product json
     num Text
     name Text
     price Int
+    UniqueNum num
 
 Order json
     name Text
     address Text
     tel Text
+    deriving Show
 
 Detail json
 	product ProductId
 	order OrderId
     net Int
+    deriving Show
 
 
 Person

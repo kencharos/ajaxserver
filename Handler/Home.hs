@@ -14,6 +14,7 @@ getHomeR :: Handler Html
 getHomeR = do
     -- test join
     -- runDBの後で doで複数文書くとトランザクション
+    {-
     runDB $ do 
             -- insertはidが戻り値
             johnId <-insert $ Person "John Doe" $ Just 35　-- justはOption,Some
@@ -35,9 +36,7 @@ getHomeR = do
                         
             delete janeId
             deleteWhere [BlogPostAuthorId ==. johnId]
-    
-     
-    
+    -}
     (formWidget, formEnctype) <- generateFormPost sampleForm
     let submission = Nothing :: Maybe (FileInfo, Text)
         handlerName = "getHomeR" :: Text

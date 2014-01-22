@@ -12,12 +12,13 @@ getOrderR = do
     -- add ab = a + b
     -- square $ add 3 4 => 49 
     {- Entityはdataとして定義している。 scalaのcase classみたいな。
-       data Point Int Int deriving (Eq,Show) ..  let p = Point 1 2
+       data Point = Point Int Int deriving (Eq,Show) ..  let p = Point 1 2
        deriving はEq,Showの派生としてShowやEqの関数を使えるようにすることを意味する。 (Mix-inに近い?)
        Showを派生しないと、printで表示もできない。物によっては特定の関数を定義する必要もあるのかも？
                  名前付きにするなら
         data Car = Car{company :: String, year ::Int}deriving Show         
         let car = Car{company="toyota", year=1991}
+        または、 let car = Car "toyora" 1991
                  名前の値をとるには
         compnay car や、year car とする。 ( company(Car) と同じなので,
         Car型の変数しか受け付けない、company, year関数ができたと理解。構造化タイピング、ダックタイピング間がある。
@@ -41,9 +42,38 @@ getOrderR = do
         $(widgetFile "order")
 
 
+-- ブラウザから受け取る注文データ
+data OrderDetails = OrderDetails{
+  order :: Order,
+  details :: [Detail2]
+}deriving Show
+
+data Detail2 = Detail2{
+  num :: Text,
+  net :: Int
+}deriving Show
+--モデルの場合、jsonを記述すれば勝手にパース処理を作るが、自前の場合は自作する。
+-- dataが特定の関数から呼ばれてもOKにするには、ToJson　data/FromJson dataで上記OrderDetailsを受け付けてくれるようにinstance定義をする。
+-- 多相関数を定義する手段として、後付で対応する型を増やせる仕組みと理解。OOPの継承より柔軟か。
+instance FromJSON OrderDetails where 
+  parseJSON (Object v) = OrderDetails <$>
+                         v .: "order" <*>
+                         v .: "details"
+instance FromJSON Detail2 where 
+  parseJSON (Object v) = Detail2 <$>
+                         v .: "num" <*>
+                         v .: "net"
+
 postOrderR :: Handler Value
 postOrderR = do
-  order <- parseJsonBody_
+  orderDetails <- parseJsonBody_
   $(logInfo) "parse OK"
-  tid <- runDB $ insert (order :: Order)
+  runDB $ do
+      oid <- insert $ order orderDetails
+      --　何でこれがうまく行って、do式のループだとだめなのか、、、
+      forM (details orderDetails) $ \d -> do
+         prod <- getBy $ UniqueNum $ num d
+         case prod of
+            Just x@(Entity pid _) -> insert $ Detail pid oid (net d)
+
   jsonToRepJson $ object ["status" .= ("ok" :: Text)]
